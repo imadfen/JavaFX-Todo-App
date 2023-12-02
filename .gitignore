@@ -1,0 +1,19 @@
+# Compiled output
+out/
+
+# Compiled class file
+*.class
+
+# Logs
+*.log
+
+# Eclipse files
+.classpath
+.project
+.settings/
+
+# Gradle build directory
+build/
+
+# Maven build directory
+target/
