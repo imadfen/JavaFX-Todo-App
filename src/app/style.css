@@ -1,0 +1,41 @@
+.title{
+    -fx-font-size: 28px;
+    -fx-font-weight: 800;
+}
+
+.tab-label{
+    -fx-font-size: 18px;
+    -fx-cursor: hand;
+    -fx-padding: 10 0 10 0;
+}
+
+.selected-tab{
+    -fx-font-weight: bold;
+    -fx-text-fill: #2f80ed;
+    -fx-border-color: #2f80ed;
+    -fx-border-width: 0 0 2 0;
+}
+
+
+
+
+/*========= list =========== */
+
+.list {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-border-width: 0;
+}
+
+.list .virtual-flow {
+    -fx-background-color: transparent;
+}
+
+.list .cell {
+    -fx-background-color: transparent;
+    -fx-padding: 5px 10px;
+}
+
+.list .cell:hover {
+    -fx-background-color: transparent;
+}
