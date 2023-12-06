@@ -30,6 +30,32 @@
 }
 
 
+.new-todo-input{
+    -fx-font-size: 14px;
+    -fx-font-weight: 400;
+    -fx-min-height: 41.23px;
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-color: rgb(189, 189, 189);
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-padding: 0px 10px;
+    -fx-outline: none;
+}
+
+.add-button{
+    -fx-background-color: rgb(47, 128, 237);
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-min-width: 80px;
+    -fx-min-height: 41.23px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}
+
+
 /* ========= list =========== */
 
 .list {
