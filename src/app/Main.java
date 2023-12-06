@@ -1,17 +1,16 @@
 package app;
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.Objects;
@@ -70,14 +69,25 @@ public class Main extends Application {
         }
     }
 
+    private void toggleTodo(Todo todo, CheckBox checkBox, Text text){
+        todo.toggleCheck();
+        boolean newValue = todo.getIsChecked();
+
+        checkBox.setSelected(newValue);
+        if (newValue){
+            text.getStyleClass().add("text-checked");
+        } else {
+            text.getStyleClass().remove("text-checked");
+        }
+    }
+
     @Override
     public void start(Stage stage) {
-        Todo[] todos = {
-                new Todo("first todo."),
-                new Todo("second todo."),
-                new Todo("third todo."),
-                new Todo("forth todo.")
-        };
+        Todo[] todos = new Todo[30];
+
+        for (int i = 0; i < 30; i++) {
+            todos[i] = new Todo("todo number " + (i+1));
+        }
 
 
         // titre:
@@ -120,14 +130,46 @@ public class Main extends Application {
         mainVBox.setAlignment(Pos.TOP_CENTER);
 
         // liste des taches:
-        ListView<String> listView = new ListView<>();
+        ListView<HBox> listView = new ListView<>();
         listView.getStyleClass().add("list");
 
+
+        todos[0].toggleCheck();
+
         for (Todo todo : todos) {
-            listView.getItems().add(todo.getValue());
+            HBox todoBox = new HBox();
+            CheckBox checkBox = new CheckBox();
+
+            Region todoSpacer = new Region();
+            todoSpacer.setPrefWidth(10);
+
+            Text todoText = new Text(todo.getValue());
+            todoText.getStyleClass().add("todo-text");
+
+            checkBox.setSelected(todo.getIsChecked());
+            if (todo.getIsChecked()){
+                todoText.getStyleClass().add("text-checked");
+            } else {
+                todoText.getStyleClass().remove("text-checked");
+            }
+
+            checkBox.setOnAction(event -> {
+                toggleTodo(todo, checkBox, todoText);
+            });
+
+            todoText.setOnMouseClicked(event -> {
+                toggleTodo(todo, checkBox, todoText);
+            });
+
+
+            todoBox.getChildren().addAll(checkBox, todoSpacer, todoText);
+
+            listView.getItems().addAll(todoBox);
         }
 
         mainVBox.getChildren().addAll(title, tabs, listView);
+
+
 
         // Scene:
         Scene scene = new Scene(mainVBox);
