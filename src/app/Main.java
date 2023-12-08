@@ -81,7 +81,6 @@ public class Main extends Application {
         tabs.setAlignment(Pos.CENTER);
         tabs.getStyleClass().add("tabs");
 
-
         // ajoute les element de l'app dans le conteneur principale:
         mainVBox.getChildren().addAll(title, tabs);
 
@@ -98,8 +97,8 @@ public class Main extends Application {
         // Stage:
             // icon de stage:
         String iconUrl = "icon.png";
-        Image trashIcon = new Image(iconUrl);
-        stage.getIcons().add(trashIcon);
+        Image AppIcon = new Image(iconUrl);
+        stage.getIcons().add(AppIcon);
 
             // taille de stage:
         stage.setHeight(650);

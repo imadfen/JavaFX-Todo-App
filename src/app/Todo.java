@@ -7,7 +7,7 @@ public class Todo {
     private boolean isChecked;
 
     public Todo(String val){
-        index = lastIndex + 1;
+        index = lastIndex;
         value = val;
         isChecked = false;
         lastIndex++;

@@ -55,6 +55,24 @@
     -fx-cursor: hand;
 }
 
+.delete-button{
+    -fx-background-color: null;
+    -fx-border-color: null;
+    -fx-cursor: hand;
+}
+
+.delete-all-button {
+    -fx-background-color: #eb5757;
+    -fx-border-radius: 4px;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-min-height: 40px;
+    -fx-min-width: 124px;
+    -fx-text-fill: #fff;
+    -fx-cursor: hand;
+}
+
+
 
 /* ========= list =========== */
 

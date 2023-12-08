@@ -3,13 +3,11 @@ package app;
 import app.section.ActiveSection;
 import app.section.FinishedSection;
 import app.section.ToutSection;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -24,24 +22,24 @@ public class Controller {
 
         switch (page) {
             case 0:
-                if (mainVBox.getChildren().size() == 3) {
+                if (mainVBox.getChildren().size() >= 3) {
                     mainVBox.getChildren().remove(2);
                 }
-                mainVBox.getChildren().add(new ToutSection(todos));
+                mainVBox.getChildren().add(2, new ToutSection(todos));
                 tab1.getStyleClass().add("selected-tab");
                 break;
             case 1:
-                if (mainVBox.getChildren().size() == 3) {
+                if (mainVBox.getChildren().size() >= 3) {
                     mainVBox.getChildren().remove(2);
                 }
-                mainVBox.getChildren().add(new ActiveSection(todos));
+                mainVBox.getChildren().add(2, new ActiveSection(todos));
                 tab2.getStyleClass().add("selected-tab");
                 break;
             case 2:
-                if (mainVBox.getChildren().size() == 3) {
+                if (mainVBox.getChildren().size() >= 3) {
                     mainVBox.getChildren().remove(2);
                 }
-                mainVBox.getChildren().add(new FinishedSection(todos));
+                mainVBox.getChildren().add(2, new FinishedSection(todos));
                 tab3.getStyleClass().add("selected-tab");
                 break;
             default:
@@ -78,7 +76,7 @@ public class Controller {
         // text de tache:
         Text todoText = new Text(todo.getValue());
         todoText.getStyleClass().add("todo-text");
-        todoText.setWrappingWidth(460);
+        todoText.setWrappingWidth(440);
         // initialisation de l'etat de text de tache:
         if (todo.getIsChecked()){
             todoText.getStyleClass().add("text-checked");
@@ -96,8 +94,21 @@ public class Controller {
             toggleTodo(todo, checkBox, todoText, page, listView, todos);
         });
 
+
+        Image trashIcon = new Image("TrashIcon.png");
+        ImageView trashIconView = new ImageView(trashIcon);
+        trashIconView.setPreserveRatio(true);
+        trashIconView.setFitWidth(20);
+
+        Button deleteButton = new Button();
+        deleteButton.setGraphic(trashIconView);
+        deleteButton.setOnMouseClicked(event -> {deleteTodo(todos, listView, todoBox, todo);});
+        deleteButton.getStyleClass().add("delete-button");
+
+
+
         // ajoute les element de tache dans le conteneur:
-        todoBox.getChildren().addAll(checkBox, todoSpacer, todoText);
+        todoBox.getChildren().addAll(checkBox, todoSpacer, todoText, deleteButton);
 
         // ajoute le conteneur dans le ListView:
         listView.getItems().addAll(todoBox);
@@ -107,7 +118,8 @@ public class Controller {
         String newTodoText = todoInput.getText();
         if (!newTodoText.isEmpty()){
             todos.add(new Todo(newTodoText));
-            createTodo(todos.get(todos.size()-1), page, listView, todos);
+            Todo lastTodo = todos.get(todos.size()-1);
+            createTodo(lastTodo, page, listView, todos);
             todoInput.clear();
             listView.scrollTo(todos.size() - 1);
         }
@@ -145,4 +157,20 @@ public class Controller {
 
 
     }
+
+    public void deleteTodo(ArrayList<Todo> todos, ListView<HBox> listView, HBox todoHBox, Todo todo){
+        todos.remove(todo);
+        listView.getItems().remove(todoHBox);
+    }
+
+    public void deleteAllTodos(ArrayList<Todo> todos, ListView<HBox> listView){
+        for (int i = 0; i < todos.size(); i++) {
+            if (todos.get(i).getIsChecked()){
+                todos.remove(todos.get(i));
+                listView.getItems().clear();
+                i--;
+            }
+        }
+    }
+
 }
