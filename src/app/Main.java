@@ -1,15 +1,11 @@
 package app;
 
-import app.section.ActiveSection;
-import app.section.FinishedSection;
-import app.section.ToutSection;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -27,10 +23,6 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         ArrayList<Todo> todos = new ArrayList<>();
-
-        for (int i = 0; i < 5; i++) {
-            todos.add(new Todo("todo number " + (i+1)));
-        }
 
         // conteneur principale des elements de l'app:
         VBox mainVBox = new VBox();

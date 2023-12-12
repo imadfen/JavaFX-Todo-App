@@ -7,7 +7,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -61,7 +60,7 @@ public class Controller {
         addTodosToListView(page, todoListView, todos);
     }
 
-    public void createTodo(Todo todo, int page, ListView<HBox> listView, ArrayList<Todo> todos){
+    public void createTodoHBox(Todo todo, int page, ListView<HBox> listView, ArrayList<Todo> todos){
         HBox todoBox = new HBox();
 
         // checkbox:
@@ -119,7 +118,7 @@ public class Controller {
         if (!newTodoText.isEmpty()){
             todos.add(new Todo(newTodoText));
             Todo lastTodo = todos.get(todos.size()-1);
-            createTodo(lastTodo, page, listView, todos);
+            createTodoHBox(lastTodo, page, listView, todos);
             todoInput.clear();
             listView.scrollTo(todos.size() - 1);
         }
@@ -131,14 +130,14 @@ public class Controller {
         switch (page){
             case 0:
                 for (Todo todo : todos) {
-                    createTodo(todo, 0, todoListView, todos);
+                    createTodoHBox(todo, 0, todoListView, todos);
                 }
                 break;
 
             case 1:
                 for (Todo todo : todos) {
                     if (!todo.getIsChecked()) {
-                        createTodo(todo, 1, todoListView, todos);
+                        createTodoHBox(todo, 1, todoListView, todos);
                     }
                 }
                 break;
@@ -146,7 +145,7 @@ public class Controller {
             case 2:
                 for (Todo todo : todos) {
                     if (todo.getIsChecked()) {
-                        createTodo(todo, 2, todoListView, todos);
+                        createTodoHBox(todo, 2, todoListView, todos);
                     }
                 }
                 break;
